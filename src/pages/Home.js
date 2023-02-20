@@ -1,7 +1,7 @@
 import React, {useRef, useEffect, useState} from 'react';
 import mapboxgl from 'mapbox-gl';
 
-import {Container, Row, Col, Carousel} from 'react-bootstrap';
+import {Container, Row, Col, Carousel, Button} from 'react-bootstrap';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import img_yichang_bridge from '../assets/images/Yichang_Yangze_bridge.jpg';
@@ -14,7 +14,7 @@ function Home() {
     const [lng] = useState(111.278069);
     const [lat] = useState(30.701920);
     const [zoom] = useState(9);
-    mapboxgl.accessToken = 'YOUR TOKEN';
+    mapboxgl.accessToken = 'pk.eyJ1Ijoicm9vdHp4eSIsImEiOiJjbDBxZXF1aXEyOWE1M29sNHRodDRtd3U3In0.8ECuEZlnZLBTOfx0D_szXQ';
     useEffect(() => {
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
@@ -25,7 +25,7 @@ function Home() {
         });
     });
     return (
-        <>
+        <div>
             <Header/>
 
             <Carousel>
@@ -86,21 +86,26 @@ function Home() {
             <Container className="my-5">
                 <Row>
                     <Col md={6}>
-
-                        <h2>Welcome to PlanX</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum c
-                            onsectetur lorem, ac dignissim libero consequat eget. Nam dignissim facilisis tristique. V
-                            estibulum aliquet faucibus orci, non dapibus lacus. Vestibulum condimentum elit a elit
-                            semper dapibus. Nullam feugiat rhoncus nulla id feugiat. Ut ultricies tellus vitae erat
-                            dictum, ut varius felis hendrerit.</p>
-                    </Col>
-                    <Col>
-                        <div ref={mapContainer} className="map-container"/>
+                        <h2>Welcome to Yichang</h2>
+                        <p>Yichang city is located in the southwest of Hubei Province and lies on the northern bank of
+                            the <strong>Yangtze River</strong>. It borders Jingzhou and Jingmen to the east, Hunan
+                            Province to the south,
+                            Enshi to the west and Shennongjia Nature Reserve and Xiangyang to the north.
+                        </p>
+                        <p>Yichang is the location of the Gezhouba Water Conservancy Project and Three Gorges Dam
+                            Project, so it is
+                            known as the <strong>world’s hydropower capital</strong>. Every year, a large number of
+                            tourists come to
+                            visit this great water conservancy miracle. </p>
+                        <Button href="/neighborhood" variant="primary">Learn more</Button>
                     </Col>
                 </Row>
             </Container>
+            <Container>
+                <div ref={mapContainer} className="map-container"/>
+            </Container>
             <Footer/>
-        </>
+        </div>
     );
 }
 

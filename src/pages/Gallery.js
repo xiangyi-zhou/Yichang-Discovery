@@ -1,26 +1,31 @@
 import React from 'react';
-import { Container, Row, Col, Image, Button } from 'react-bootstrap';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import {Container, Row, Col, Card} from 'react-bootstrap';
+import yichangImages from '../assets/data/yichangImages';
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+
 function Gallery() {
-  return (
-    <>
-      <Header />
-      <Container className="my-5">
-        <Row>
-          <Col md={6}>
-            <Image src="https://via.placeholder.com/400" fluid />
-          </Col>
-          <Col md={6}>
-            <h2>Gallery</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum consectetur lorem, ac dignissim libero consequat eget. Nam dignissim facilisis tristique. Vestibulum aliquet faucibus orci, non dapibus lacus. Vestibulum condimentum elit a elit semper dapibus. Nullam feugiat rhoncus nulla id feugiat. Ut ultricies tellus vitae erat dictum, ut varius felis hendrerit.</p>
-            <Button variant="primary">Learn more</Button>
-          </Col>
-        </Row>
-      </Container>
-      <Footer />
-    </>
-  );
+    return (
+        <Container>
+            <Header/>
+            <h1>Photo Gallery</h1>
+            <Row xs={1} sm={2} md={3}>
+                {yichangImages.map((image, index) => (
+                    <Col key={index}>
+                        <Card>
+                            <Card.Img variant="top" src={image.image}/>
+                            <Card.Body>
+                                <Card.Title>{image.title}</Card.Title>
+                                <Card.Text>{image.description}</Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+            <Footer/>
+        </Container>
+
+    );
 }
 
 export default Gallery;
