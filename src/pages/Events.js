@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 function Events() {
   return (
-    <>
+    <div>
       <Header />
       <Container className="my-5">
         <Row>
@@ -20,7 +20,7 @@ function Events() {
         </Row>
       </Container>
       <Footer />
-    </>
+    </div>
   );
 }
 

@@ -45,7 +45,7 @@ function Home() {
                     </div>
                 </Carousel.Item>
                 <Carousel.Item>
-                    <div style={{height: '40vh'}}>
+                    <div style={{height: '50vh'}}>
                         <img
                             className="d-block w-100"
                             src={img_yichang_three_gorges}
