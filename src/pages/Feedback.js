@@ -12,52 +12,77 @@ function Feedback() {
     const [submitted, setSubmitted] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
 
+    const regions = [
+        'us-east-1',
+        'us-east-2',
+        'us-west-1',
+        'us-west-2',
+        'ca-central-1',
+        'eu-central-1',
+        'eu-north-1',
+        'eu-west-1',
+        'eu-west-2',
+        'eu-west-3',
+    ];
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!validateEmail(email)) {
             setErrorMsg('Please enter a valid email address.');
             return;
         }
-        // Send email using AWS SES
-        AWS.config.update({
-            accessKeyId: awsConfig.accessKeyId,
-            secretAccessKey: awsConfig.secretAccessKey,
-            region: 'eu-west-1'
-        });
 
-        const params = {
-            Destination: {
-                ToAddresses: [email]
-            },
-            Message: {
-                Body: {
-                    Html: {
-                        Charset: 'UTF-8',
-                        Data: `<p>Thank you for your feedback!</p><p>Name: ${name}</p><p>Email: ${email}</p><p>Feedback: ${feedback}</p>`
+        let sent = false;
+        let error = null;
+        for (let i = 0; i < regions.length && !sent; i++) {
+            const region = regions[i];
+            try {
+                AWS.config.update({
+                    accessKeyId: awsConfig.accessKeyId,
+                    secretAccessKey: awsConfig.secretAccessKey,
+                    region
+                });
+
+                const params = {
+                    Destination: {
+                        ToAddresses: [email]
                     },
-                    Text: {
-                        Charset: 'UTF-8',
-                        Data: `Thank you for your feedback!\nName: ${name}\nEmail: ${email}\nFeedback: ${feedback}`
-                    }
-                },
-                Subject: {
-                    Charset: 'UTF-8',
-                    Data: 'Feedback Received'
-                }
-            },
-            Source: 'zxyzhouxiangyi@gmail.com'
-        };
+                    Message: {
+                        Body: {
+                            Html: {
+                                Charset: 'UTF-8',
+                                Data: `<p>Thank you for your feedback!</p><p>Name: ${name}</p><p>Email: ${email}</p><p>Feedback: ${feedback}</p>`
+                            },
+                            Text: {
+                                Charset: 'UTF-8',
+                                Data: `Thank you for your feedback!\nName: ${name}\nEmail: ${email}\nFeedback: ${feedback}`
+                            }
+                        },
+                        Subject: {
+                            Charset: 'UTF-8',
+                            Data: 'Feedback Received'
+                        }
+                    },
+                    Source: 'zxyzhouxiangyi@gmail.com'
+                };
 
-        const sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(params).promise();
+                const sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(params).promise();
+                await sendPromise;
+                sent = true;
+            } catch (err) {
+                console.error(err);
+                error = err;
+            }
+        }
 
-        try {
-            await sendPromise;
+        if (sent) {
             setSubmitted(true);
-        } catch (error) {
-            console.error(error);
+        } else {
             setErrorMsg('There was an error submitting your feedback. Please try again later.');
+            console.error(error);
         }
     };
+
 
     const validateEmail = (email) => {
         // regex to match email addresses
