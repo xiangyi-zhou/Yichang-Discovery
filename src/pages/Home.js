@@ -30,7 +30,7 @@ function Home() {
 
             <Carousel>
                 <Carousel.Item>
-                    <div style={{height: '40vh'}}>
+                    <div style={{height: '50vh'}}>
                         <img
                             className="d-block w-100"
                             src={img_yichang_bridge}
@@ -64,7 +64,7 @@ function Home() {
                 </Carousel.Item>
 
                 <Carousel.Item>
-                    <div style={{height: '40vh'}}>
+                    <div style={{height: '50vh'}}>
                         <img
                             className="d-block w-100"
                             src={img_yichang_attractions}
