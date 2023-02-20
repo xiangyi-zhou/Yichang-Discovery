@@ -1,27 +1,64 @@
-import React from 'react';
-import { Container, Row, Col, Image, Button } from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Container, Row, Col, Card, Button, Modal} from 'react-bootstrap';
+import events from '../assets/data/data_events';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function Events() {
-  return (
-    <div>
-      <Header />
-      <Container className="my-5">
-        <Row>
-          <Col md={6}>
-            <Image src="https://via.placeholder.com/400" fluid />
-          </Col>
-          <Col md={6}>
-            <h2>Events</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum consectetur lorem, ac dignissim libero consequat eget. Nam dignissim facilisis tristique. Vestibulum aliquet faucibus orci, non dapibus lacus. Vestibulum condimentum elit a elit semper dapibus. Nullam feugiat rhoncus nulla id feugiat. Ut ultricies tellus vitae erat dictum, ut varius felis hendrerit.</p>
-            <Button variant="primary">Learn more</Button>
-          </Col>
-        </Row>
-      </Container>
-      <Footer />
-    </div>
-  );
+function Event() {
+    const [showModal, setShowModal] = useState(false);
+    const [modalData, setModalData] = useState({});
+
+    const handleClose = () => setShowModal(false);
+
+    const handleShow = (event) => {
+        setShowModal(true);
+        setModalData(event);
+    };
+
+    return (
+        <Container>
+            <Header/>
+            <h1>Events</h1>
+            <Row xs={1} md={2} className="g-4">
+                {events.map((event) => (
+                    <Col key={event.id}>
+                        <Card>
+                            <Card.Img variant="top" src={event.image}/>
+                            <Card.Body>
+                                <Card.Title>{event.title}</Card.Title>
+                                <Card.Text>{event.date}</Card.Text>
+                                <Button onClick={() => handleShow(event)}>View Details</Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+
+            <Modal show={showModal} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{modalData.name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>{modalData.title}</p>
+                    <p>{modalData.description}</p>
+                    <p>Date: {modalData.date}</p>
+                    <p>Time: {modalData.time}</p>
+                    <p>Location: {modalData.location}</p>
+                    <p>Price: {modalData.price}</p>
+                    <p>Website: {modalData.website}</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" href={modalData.website}>
+                        Visit Website
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            <Footer/>
+        </Container>
+    );
 }
 
-export default Events;
+export default Event;
