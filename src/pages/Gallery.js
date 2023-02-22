@@ -9,7 +9,7 @@ function Gallery() {
         <Container>
             <Header/>
             <h1>Photo Gallery</h1>
-            <Row xs={1} sm={2} md={3}>
+            <Row xs={2} sm={3} md={4}>
                 {yichangImages.map((image, index) => (
                     <Col key={index}>
                         <Card>

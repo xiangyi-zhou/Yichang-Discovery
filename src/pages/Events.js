@@ -19,7 +19,7 @@ function Event() {
         <Container>
             <Header/>
             <h1>Events</h1>
-            <Row xs={1} md={2} className="g-4">
+            <Row xs={2} md={3} className="g-4">
                 {events.map((event) => (
                     <Col key={event.id}>
                         <Card>

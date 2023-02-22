@@ -19,7 +19,7 @@ function Neighborhood() {
         <Container>
             <Header/>
             <h1>Neighborhoods</h1>
-            <Row xs={1} md={2} className="g-4">
+            <Row xs={2} md={3} className="g-4">
                 {neighborhoods.map((neighborhood) => (
                     <Col key={neighborhood.id}>
                         <Card>

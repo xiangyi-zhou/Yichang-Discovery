@@ -94,6 +94,12 @@ function Feedback() {
         <Container>
             <Header/>
             <h1>Feedback</h1>
+            <p>We're constantly working to improve our website and provide the best possible experience for our users.
+                We value your feedback and would love to hear from you. Whether you have suggestions for new features,
+                ideas for improving the site, or just want to share your thoughts!</p>
+
+            <p>Please take a moment to fill out the feedback form below and let us know what you think. We appreciate
+                your time and input and will use it to make our website even better. Thank you!</p>
             {submitted ? (
                 <p>Thank you for your feedback!</p>
             ) : (

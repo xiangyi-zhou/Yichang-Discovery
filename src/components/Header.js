@@ -1,4 +1,3 @@
-import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import logo from '../assets/images/logo.png';
 
@@ -11,7 +10,7 @@ function Header() {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
+        <Nav className="ml-lg-5">
           <Nav.Link href="/about">About</Nav.Link>
           <Nav.Link href="/neighborhood">Neighborhood</Nav.Link>
           <Nav.Link href="/events">Events</Nav.Link>
@@ -22,5 +21,4 @@ function Header() {
     </Navbar>
   );
 }
-
 export default Header;
